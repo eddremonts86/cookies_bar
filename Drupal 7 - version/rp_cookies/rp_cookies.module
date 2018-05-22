@@ -1,0 +1,134 @@
+<?php
+
+function rp_cookies_init()
+{   //LOAD JS TO FRONTEND
+    if (!geturlvalidation()) {
+
+        drupal_add_js(drupal_get_path('module', 'rp_cookies') . '/js/liberiess/jquery-2.2.4.min.js', 'file');
+        drupal_add_js(drupal_get_path('module', 'rp_cookies') . '/js/liberiess/bootstrap.min.js', 'file');
+        drupal_add_js(drupal_get_path('module', 'rp_cookies') . '/js/liberiess/bootstrap-slider.js', 'file');
+        drupal_add_js(drupal_get_path('module', 'rp_cookies') . '/js/liberiess/cookieconsent.min.js', 'file');
+        drupal_add_js(drupal_get_path('module', 'rp_cookies') . '/js/liberiess/js.cookie.min.js', 'file');
+
+        drupal_add_js(drupal_get_path('module', 'rp_cookies') . '/js/custom/footerCookiesbar.js', 'file');
+
+
+        drupal_add_css(drupal_get_path('module', 'rp_cookies') . '/css/liberiess/bootstrap.min.css');
+        drupal_add_css(drupal_get_path('module', 'rp_cookies') . '/css/liberiess/bootstrap-slider.min.css');
+        drupal_add_css(drupal_get_path('module', 'rp_cookies') . '/css/liberiess/cookieconsent.min.css');
+        drupal_add_css(drupal_get_path('module', 'rp_cookies') . '/css/custom/css.css');
+
+        if (geturlvalidation('cookies')) {
+            drupal_add_js(drupal_get_path('module', 'rp_cookies') . '/js/custom/pageCookies.js', 'file');
+            $id = rand(155421, 65468464);
+            $data = array(
+                '#type' => 'html_tag',
+                '#tag' => 'meta',
+                '#attributes' => array(
+                    'name' => 'robots',
+                    'content' => 'noindex, nofollow',
+                ),
+            );
+            drupal_add_html_head($data, $id);
+        }
+    }
+}
+function geturlvalidation($tofaind = null){
+    $url = request_uri();
+    $url = explode('/',$url);
+    $defoultArray = [
+        'admin',
+        'add',
+        'edit',
+        'edit?destination=admin',
+        'config',
+        'content'
+    ];
+    if(isset($tofaind)){
+        $defoultArray[]=$tofaind;
+    }
+
+    foreach ($defoultArray as $data){
+        if(in_array($data,$url)){
+            return true;
+        }
+    }
+    if($_GET['edit']){
+        return true;
+    }
+
+    return false;
+
+
+}
+function rp_cookies_menu()
+{
+    $items['cookies'] = array(
+        'type' => MENU_NORMAL_ITEM,
+        'title' => t('Title'),
+        'description' => 'My custom and very special page',
+        'page callback' => 'rp_cookies_special_page',
+        'access callback' => 'user_access',
+        'access arguments' => array('access content'),
+    );
+    return $items;
+}
+function rp_cookies_special_page()
+{
+    $obj1 = "Required Cookies";
+    $obj2 = "Functional & Advertising Cookies";
+    $content = ' 
+    <div class="container cookies_form">
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 id="cookies_title" class="panel-title">Your Choices Regarding Cookies on this Site<br>
+                    <small>
+                    Cookies are important to the proper functioning of a site. To improve your experience, 
+                            we use cookies to remember log-in details and provide secure log-in, collect statistics to 
+                            optimize site functionality and deliver content tailored to your interests.<br> 
+                            Click Agree and Proceed to accept cookies and go directly to the site. Different types of cookies are 
+                            explained in our Privacy Policy & Cookie Policy. You can choose whether to accept certain 
+                            cookies while on the site:
+                    </small>
+                     <br> 
+                </div>
+                <div class="panel-body panel_body_padding">
+
+
+                    <div class="def_conf">
+                        <div class="pull-left" id="cookies_labels">
+                            <span id="cookies_c" class="hidden">Cookies label</span>
+                            <input id="ex19"
+                                   type="text"
+                                   data-slider-ticks="[1, 2]">
+                        </div>
+                        <div id="cookies_content" class="pull-right">                            
+                            <div>
+                                <h4 id="cookies_requiered">Required Cookies</h4>
+                                <ul>
+                                     <li>These cookies are required to enable core site functionality, 
+                                     specifically make sure the website looks consistent</li>
+                                </ul>
+                          
+                                <h4 id="cookies_optional">Functional & Advertising Cookies</h4>
+                                <ul>
+                                     <li>These cookies allow us to analyze site usage so we can measure and improve performance.</li>
+                                </ul>
+                        
+                            </div>
+                             
+                        </div>
+                    </div> 
+                      
+<input id="aggree" class="btn btn-primary pull-right" type="submit" value="I Agree"></h3>
+            </div></div>
+        </div>
+    </div>
+</div>';
+    return $content;
+}
+
+
+
