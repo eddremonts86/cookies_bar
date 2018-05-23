@@ -20,13 +20,11 @@
                 },
                 "theme": "classic",
                 "content": {
-                    "message": "This website uses cookies to ensure you get the best experience on our website, or change the cookies configuration for livegoals.com <a href='http://www.livegoals.com/cookies?version=2.0'>here</a>",
-                    "link": "Learn more ",
-                    "dismiss": "Got it",
-                    "href": "http://www.livegoals.com/privacypolicy"
-                }
+            "message": "Denne hjemmeside bruger cookies til at sikre, at du får den bedste oplevelse på vores hjemmeside<br>Du kan også skifte dine cookies-konfigurationer <a href='cookies'>her</a><br>",
+            "link": "Lær mere",
+            "dismiss": "Forstået",
+            "href": "privacy-policy"
+        }
             })});
         }); 
 </script>
-
-<?php //include 'footer_bar_cookies_page.php';?>

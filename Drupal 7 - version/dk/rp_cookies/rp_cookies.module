@@ -1,5 +1,6 @@
 <?php
 
+
 function rp_cookies_init()
 {   //LOAD JS TO FRONTEND
     if (!geturlvalidation()) {
@@ -42,8 +43,9 @@ function geturlvalidation($tofaind = null){
         'edit',
         'edit?destination=admin',
         'config',
-        'content'
-    ];
+	'content'
+	
+      ];
     if(isset($tofaind)){
         $defoultArray[]=$tofaind;
     }
@@ -56,11 +58,10 @@ function geturlvalidation($tofaind = null){
     if($_GET['edit']){
         return true;
     }
-
     return false;
-
-
 }
+
+
 function rp_cookies_menu()
 {
     $items['cookies'] = array(
@@ -73,56 +74,47 @@ function rp_cookies_menu()
     );
     return $items;
 }
+
+/**
+ * Page callback.
+ */
 function rp_cookies_special_page()
 {
-    $obj1 = "Required Cookies";
-    $obj2 = "Functional & Advertising Cookies";
+    $panelTitle = "Dine valg vedrørende cookies på dette site. Cookies er vigtige for, at et site fungerer korrekt.";
+    $panelTitleSubheader = "For at forbedre din oplevelse bruger vi cookies til at huske login-oplysninger og sørge for sikkert login, indsamle statistikker for at optimere funktionaliten på webstedet og levere indhold, der er skræddersyet til dine interesser.
+Klik på Accepter og Fortsæt for at acceptere cookies og gå direkte til webstedet. Forskellige typer af cookies forklares i vores politik for beskyttelse af personlige oplysninger og cookies. Du kan vælge om du vil acceptere visse cookies mens du er på sitet.:";
+    $cookies_req = "Påkrævede Cookies";
+    $cookies_req_text = "Disse cookies er nødvendige for at aktivere kernefunktioner på siden, specielt til at sikre at hjemmesiden ser konsistent ud.";
+    $cookies_opc = "Funktionelle og Reklame Cookies";
+    $cookies_opc_text = "Disse cookies giver is muligheden for at analysere brug af sitet, så vi kan måle og forbedre ydeevnen..";
+    $agree = "Jeg er enig";
+
     $content = ' 
     <div class="container cookies_form">
     <div class="row">
         <div class="col-lg-8">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 id="cookies_title" class="panel-title">Your Choices Regarding Cookies on this Site<br>
-                    <small>
-                    Cookies are important to the proper functioning of a site. To improve your experience, 
-                            we use cookies to remember log-in details and provide secure log-in, collect statistics to 
-                            optimize site functionality and deliver content tailored to your interests.<br> 
-                            Click Agree and Proceed to accept cookies and go directly to the site. Different types of cookies are 
-                            explained in our Privacy Policy & Cookie Policy. You can choose whether to accept certain 
-                            cookies while on the site:
-                    </small>
+                    <h3 id="cookies_title" class="panel-title">'.$panelTitle.'<br>
+                    <small>'.$panelTitleSubheader.'</small>
                      <br> 
                 </div>
                 <div class="panel-body panel_body_padding">
-
-
                     <div class="def_conf">
                         <div class="pull-left" id="cookies_labels">
-                            <span id="cookies_c" class="hidden">Cookies label</span>
-                            <input id="ex19"
-                                   type="text"
-                                   data-slider-ticks="[1, 2]">
+                            <span id="cookies_c" class="hidden">cookies levels</span>
+                            <input id="ex19" type="text" data-slider-ticks="[1, 2]">
                         </div>
                         <div id="cookies_content" class="pull-right">                            
                             <div>
-                                <h4 id="cookies_requiered">Required Cookies</h4>
-                                <ul>
-                                     <li>These cookies are required to enable core site functionality, 
-                                     specifically make sure the website looks consistent</li>
-                                </ul>
-                          
-                                <h4 id="cookies_optional">Functional & Advertising Cookies</h4>
-                                <ul>
-                                     <li>These cookies allow us to analyze site usage so we can measure and improve performance.</li>
-                                </ul>
-                        
-                            </div>
-                             
+                                <h4 id="cookies_requiered">'.$cookies_req.'</h4>
+                                <ul><li>'.$cookies_req_text.'</li></ul>
+                                <h4 id="cookies_optional">'.$cookies_opc.'</h4>
+                                <ul><li>'.$cookies_opc_text.'</li></ul>
+                          </div>
                         </div>
-                    </div> 
-                      
-<input id="aggree" class="btn btn-primary pull-right" type="submit" value="I Agree"></h3>
+                    </div>                       
+                    <input id="aggree" class="btn btn-primary pull-right" type="submit" value="'.$agree.'"></h3>
             </div></div>
         </div>
     </div>
