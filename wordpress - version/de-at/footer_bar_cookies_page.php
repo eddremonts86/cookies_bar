@@ -20,11 +20,12 @@
                 },
                 "theme": "classic",
                 "content": {
-            "message": "Denna hemsidan använder cookies för din bästa upplevelse av vår webbplats<br>Du kan ändra dina cookie-inställningar <a href='cookies'>här</a><br>",
-            "link": "Lär dig mer",
-            "dismiss": "Förstår",
-            "href": "sekretesspolicy"
-        }
+                    "content": {
+                        "message": "Diese Webseite verwendet Cookies um Ihnen das best mögliche Erlebnis zu gewährleisten<br>Sie können Ihre Cookie-Einstellungen  <a href='cookies'>hier ändern</a><br>",
+                        "link": "Erfahren Sie mehr ",
+                        "dismiss": "Verstanden",
+                        "href": "privacy-policy"
+                    }
             })});
         }); 
 </script>
